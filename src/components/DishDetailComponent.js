@@ -27,9 +27,9 @@ class DishDetail extends Component {
     {
       const rate=dish.comments.map((item) =>{
         return(
-              <ul  className="list-group">
+              <ul id={item.id} className="list-group">
                 <li className="list-group-item">{item.comment}</li>
-                <li className="list-group-item">--{item.author} , {item.date}</li>
+                <li className="list-group-item">--{item.author} , { new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(item.date))) }</li>
               </ul>
         );
       });
@@ -48,15 +48,17 @@ class DishDetail extends Component {
   }
 
   render () {
-    var dish=this.props.selectedDish;
+    var dish=this.props.dish;
     if(dish!=null)
     {
       return(
+        <div className="container">
         <div className="row">
           <div className="col-12 col-md-5 m-1">
             {this.renderDish(dish)}
           </div>
           {this.renderComments(dish)}
+        </div>
         </div>
 
       );
